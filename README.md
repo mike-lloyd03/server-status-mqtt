@@ -1,5 +1,4 @@
 # Server Status
-## Send server statistics via MQTT
 
 This Python script sends machine status messages to an MQTT broker.
 

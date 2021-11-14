@@ -1,4 +1,4 @@
-"""Contains functions for getting the system statistics."""
+"""Contains functions for getting the system statuses."""
 import platform
 from datetime import datetime
 

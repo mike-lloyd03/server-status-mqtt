@@ -47,7 +47,7 @@ def connect_mqtt():
     return client
 
 
-def send_statistics(client):
+def send_status(client):
     """Publishes messages to the MQTT broker."""
 
     while True:
