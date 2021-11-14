@@ -1,4 +1,4 @@
-"""main contains the primary logic for sending messages to the mqtt broker."""
+"""This module contains the primary logic for sending messages to the MQTT broker."""
 
 import os
 
