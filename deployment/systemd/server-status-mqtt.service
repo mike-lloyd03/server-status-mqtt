@@ -1,0 +1,11 @@
+[Unit]
+Description=Server-Status MQTT Publisher
+
+[Service]
+Type=simple
+WorkingDirectory=WORKING_DIRECTORY
+ExecStart=WORKING_DIRECTORY/.venv/bin/python3 WORKING_DIRECTORY/server_status.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
