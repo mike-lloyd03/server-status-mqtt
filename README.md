@@ -11,7 +11,7 @@ Currently, this script supports sending the following machine status information
 
 ### Requirements
 - Python 3
-- `make`
+- `make` (Not really needed but it'll make things a bit easier)
 
 ### Installation
 Clone this repo somewhere on the host machine and run the following in that directory.
@@ -71,7 +71,7 @@ tmpfs            6571416       360   6571056   1% /run/user/1000
 ### Home Assistant Integration
 These MQTT messages can be used to create custom sensors in Home Assistant.
 
-The following template can be added to you `configuration.yaml` file.
+The following template can be added to you `configuration.yaml` file to create an MQTT sensor.
 
 ```yaml
   - platform: mqtt
