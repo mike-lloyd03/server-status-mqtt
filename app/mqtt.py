@@ -1,6 +1,7 @@
 """This module contains the primary logic for sending messages to the MQTT broker."""
 
 import os
+from random import randrange
 
 import paho.mqtt.client as mqtt
 from config import Config
@@ -25,9 +26,10 @@ if not USERNAME or not PASSWORD or not BROKER:
 config = Config()
 
 PORT = config.PORT
-CLIENT_ID = "server_status" if ENV == "production" else "server_status-dev"
-hostname = get_hostname()
-topic_prefix = f"{CLIENT_ID}/{hostname}/"
+TOPIC_ROOT = "server_status" if ENV == "production" else "server_status-dev"
+HOSTNAME = get_hostname()
+TOPIC_PREFIX = f"{TOPIC_ROOT}/{HOSTNAME}/"
+CLIENT_ID = f"{TOPIC_ROOT}_{randrange(1000,9999)}"
 
 
 def connect_mqtt():
@@ -40,7 +42,7 @@ def connect_mqtt():
         else:
             print(f"Failed to connect to MQTT broker. Return code {rc}")
 
-    client = mqtt.Client(CLIENT_ID)
+    client = mqtt.Client(TOPIC_ROOT)
     client.username_pw_set(USERNAME, PASSWORD)
     client.on_connect = cb_on_connect
     client.connect(BROKER, PORT)
@@ -52,12 +54,12 @@ def send_status(client):
 
     while True:
         if config.PROCESSOR_USE:
-            topic = topic_prefix + "processor_use"
+            topic = TOPIC_PREFIX + "processor_use"
             result = client.publish(topic, get_processor_use(15))
             check_error(result, topic)
 
         if config.PROCESSOR_TEMPERATURE:
-            topic = topic_prefix + "processor_temperature"
+            topic = TOPIC_PREFIX + "processor_temperature"
             result = client.publish(
                 topic,
                 get_processor_temperature(),
@@ -66,7 +68,7 @@ def send_status(client):
 
         if config.DISK_USE_PERCENT:
             for i, path in enumerate(config.DISK_PATHS):
-                topic = topic_prefix + f"disk_use_percent_disk{i}"
+                topic = TOPIC_PREFIX + f"disk_use_percent_disk{i}"
                 result = client.publish(
                     topic,
                     get_disk_use_percent(path),
@@ -74,12 +76,12 @@ def send_status(client):
                 check_error(result, topic)
 
         if config.MEMORY_USE:
-            topic = topic_prefix + "memory_use"
+            topic = TOPIC_PREFIX + "memory_use"
             result = client.publish(topic, get_memory_use())
             check_error(result, topic)
 
         if config.LAST_BOOT:
-            topic = topic_prefix + "last_boot"
+            topic = TOPIC_PREFIX + "last_boot"
             result = client.publish(topic, get_last_boot())
             check_error(result, topic)
 
