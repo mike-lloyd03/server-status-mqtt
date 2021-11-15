@@ -15,7 +15,7 @@ load_dotenv()
 USERNAME = os.getenv("MQTT_USERNAME")
 PASSWORD = os.getenv("MQTT_PASSWORD")
 BROKER = os.getenv("MQTT_BROKER")
-ENV = os.getenv("ENV", "development")
+ENV = os.getenv("ENV", "production")
 
 if not USERNAME or not PASSWORD or not BROKER:
     raise ValueError(
@@ -66,7 +66,7 @@ def send_status(client):
 
         if config.DISK_USE_PERCENT:
             for i, path in enumerate(config.DISK_PATHS):
-                topic = f"{topic_prefix}/disk_use_percent_disk{i}"
+                topic = topic_prefix + f"disk_use_percent_disk{i}"
                 result = client.publish(
                     topic,
                     get_disk_use_percent(path),

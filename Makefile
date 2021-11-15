@@ -1,4 +1,5 @@
 SHELL := /bin/bash
+PWD := $(shell pwd)
 
 .PHONY: venv
 venv: requirements.txt
@@ -7,5 +8,5 @@ venv: requirements.txt
 
 .PHONY: deploy
 deploy: 
-	sed "s|WORKING_DIRECTORY|$(pwd)|g" deployment/systemd/server-status-mqtt.service > /etc/systemd/system/server-status-mqtt.service
+	sed "s|WORKING_DIRECTORY|${PWD}|g" deployment/systemd/server-status-mqtt.service | sudo tee /etc/systemd/system/server-status-mqtt.service > /dev/null
 	systemctl daemon-reload

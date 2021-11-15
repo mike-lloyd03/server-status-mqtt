@@ -2,7 +2,7 @@ class Config(object):
     """Set the below values to true to enable them."""
 
     DISK_USE_PERCENT = True
-    DISK_PATHS = ("/", "/dev/shm")
+    DISK_PATHS = ("/",)
     PROCESSOR_USE = True
     PROCESSOR_TEMPERATURE = True
     MEMORY_USE = True
