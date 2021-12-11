@@ -32,11 +32,11 @@ systemctl enable --now server-status-mqtt.service
 ### Usage
 Messages will be published with the following topics:
 
-`server-status/<hostname_of_machine>/processor_use`
-`server-status/<hostname_of_machine>/processor_temperature`
-`server-status/<hostname_of_machine>/memory_use`
-`server-status/<hostname_of_machine>/disk_use_percent_disk<number>`
-`server-status/<hostname_of_machine>/last_boot`
+`server-status/<hostname_of_machine>/processor_use`  
+`server-status/<hostname_of_machine>/processor_temperature`  
+`server-status/<hostname_of_machine>/memory_use`  
+`server-status/<hostname_of_machine>/disk_use_percent_disk<number>`  
+`server-status/<hostname_of_machine>/last_boot`  
 
 (`disk_use_percent_disk<number>` will be numbered in the order in which the paths are specified in `config.py`.)
 
